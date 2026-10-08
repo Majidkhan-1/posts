@@ -1,7 +1,12 @@
 const ImageKit = require("@imagekit/nodejs")
 
+const privateKey = process.env.IMAGEKIT_PRIVATE_KEY
+if (!privateKey) {
+    throw new Error("IMAGEKIT_PRIVATE_KEY environment variable is required")
+}
+
 const imageKit = new ImageKit({
-    privateKey:"private_wG22ShHAatAzH+HvsUlCOPf8+iY="
+    privateKey
 })
 
 async function uploadFile(buffer) {

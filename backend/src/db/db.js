@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 async function connectDB() {
-    await mongoose.connect("mongodb+srv://Majidkhan:DXt9IN0KjFlgAQp1@backend.hstssz4.mongodb.net/project-1")
+    const uri = process.env.MONGODB_URI
+    if (!uri) {
+        throw new Error("MONGODB_URI environment variable is required")
+    }
+
+    await mongoose.connect(uri)
     console.log("connected to DB")
 }
 

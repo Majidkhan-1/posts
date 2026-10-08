@@ -1,7 +1,6 @@
-import React from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'      
-
+import { API_BASE_URL } from '../api'
 
 
 
@@ -13,7 +12,7 @@ const Navigate = useNavigate()
 
     const formData = new FormData(e.target)
 
-    axios.post("http://localhost:3000/create-post", formData)
+    axios.post(`${API_BASE_URL}/create-post`, formData)
         .then((res) => {
             Navigate("/feed")
             console.log(res)

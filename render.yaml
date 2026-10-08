@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: posts-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: IMAGEKIT_PRIVATE_KEY
+        sync: false
+  - type: static
+    name: posts-frontend
+    rootDir: Frontend/vite-project
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: posts-api
+          property: host
